@@ -5,12 +5,22 @@ Anki Verse Memorization CLI
 Promotes mature cards (interval ≥ 21 days) across citation decks and flags
 immature ones for review.
 
+Each deck pair is processed in order. For every card in the source deck:
+  - Mature (interval ≥ 21 days): duplicated into the target deck using the
+    target deck's note type. If a matching card already exists in the target
+    deck it is skipped silently (idempotent). Any red flag on the source card
+    is cleared after promotion.
+  - Immature (interval < 21 days): marked with a red flag (flag = 1).
+
 Deck promotion chain:
-  Memorización::2. Citas::1. Libros
-      ↓ (mature → duplicate, immature → 🚩 red flag)
-  Memorización::2. Citas::2. Capítulos
-      ↓ (mature → duplicate, immature → 🚩 red flag)
-  Memorización::2. Citas::3. Versículos
+
+  Memorización::1. Versículos                    [Memorización de Versículos]
+      ↓ mature → duplicate   immature → 🚩 flag
+  Memorización::2. Citas::1. Libros              [Memorización de Citas (Libros)]
+      ↓ mature → duplicate   immature → 🚩 flag
+  Memorización::2. Citas::2. Capítulos           [Memorización de Citas (Capítulos)]
+      ↓ mature → duplicate   immature → 🚩 flag
+  Memorización::2. Citas::3. Versículos          [Memorización de Citas (Versículos)]
 """
 
 import sys
