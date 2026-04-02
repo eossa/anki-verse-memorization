@@ -71,10 +71,9 @@ def process_deck(source_deck: str, target_deck: str, target_model_name: str) -> 
         fields: dict = note["fields"]
         tags: list[str] = note.get("tags", [])
         first_val = _first_field_value(fields)
+        already_exists = _note_exists_in_deck(target_deck, first_val)
 
         if interval >= MATURE_INTERVAL:
-            already_exists = _note_exists_in_deck(target_deck, first_val)
-
             if already_exists:
                 result.skipped.append(first_val)
             else:
@@ -87,9 +86,15 @@ def process_deck(source_deck: str, target_deck: str, target_model_name: str) -> 
                 anki.set_card_flag(card_id, NO_FLAG)
                 result.flag_cleared.append(first_val)
         else:
-            # Mark immature card with red flag (only if not already set)
-            if current_flag != RED_FLAG:
-                anki.set_card_flag(card_id, RED_FLAG)
-            result.flagged.append(first_val)
+            if already_exists:
+                result.skipped.append(first_val)
+                if current_flag == RED_FLAG:
+                    anki.set_card_flag(card_id, NO_FLAG)
+                    result.flag_cleared.append(first_val)
+            else:
+                # Mark immature card with red flag (only if not already set)
+                if current_flag != RED_FLAG:
+                    anki.set_card_flag(card_id, RED_FLAG)
+                result.flagged.append(first_val)
 
     return result
