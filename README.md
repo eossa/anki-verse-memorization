@@ -15,6 +15,9 @@ Memorización::2. Citas::2. Capítulos
     ↓  mature                      → duplicate card into Versículos
     ↓  immature                    → 🚩 red flag
 Memorización::2. Citas::3. Versículos
+    ↓  mature                      → duplicate card into Versículos (final)
+    ↓  immature                    → 🚩 red flag
+Memorización::3. Versículos
 ```
 
 Each stage uses the target deck's own note type when creating the duplicate, so cards always have the correct model for their deck.
@@ -29,6 +32,7 @@ When a mature card is duplicated (or already exists in the target deck), any red
 | `Memorización::2. Citas::1. Libros` | `Memorización de Citas (Libros)` |
 | `Memorización::2. Citas::2. Capítulos` | `Memorización de Citas (Capítulos)` |
 | `Memorización::2. Citas::3. Versículos` | `Memorización de Citas (Versículos)` |
+| `Memorización::3. Versículos` | `Memorización de Versículos sin pista` |
 
 ## Requirements
 

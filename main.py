@@ -21,6 +21,8 @@ Deck promotion chain:
   Memorización::2. Citas::2. Capítulos           [Memorización de Citas (Capítulos)]
       ↓ mature → duplicate   immature → 🚩 flag
   Memorización::2. Citas::3. Versículos          [Memorización de Citas (Versículos)]
+      ↓ mature → duplicate   immature → 🚩 flag
+  Memorización::3. Versículos                    [Memorización de Versículos sin pista]
 """
 
 import sys
@@ -45,6 +47,11 @@ DECK_PAIRS = [
         "Memorización::2. Citas::2. Capítulos",
         "Memorización::2. Citas::3. Versículos",
         "Memorización de Citas (Versículos)",
+    ),
+    (
+        "Memorización::2. Citas::3. Versículos",
+        "Memorización::3. Versículos",
+        "Memorización de Versículos sin pista",
     ),
 ]
 
